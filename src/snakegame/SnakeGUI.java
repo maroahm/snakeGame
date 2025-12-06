@@ -35,6 +35,10 @@ public class SnakeGUI {
 
         frame.pack();
         frame.setVisible(true);
+        gameEngine.displayWelcomeScreen();
+    }
+    public GameEngine getGameEngine() {
+        return gameEngine;
     }
     
     private void setupMenu() {

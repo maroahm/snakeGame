@@ -15,29 +15,31 @@ public class DatabaseManager {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/snake_game";
     private static final String DB_USER = "snake_user";
     private static final String DB_PASSWORD = "snake_password";
+
     private Connection connection;
-    
-    public void connect(){
-        try{
-            if(connection == null || connection.isClosed()){
-                connection = DriverManager.getConnection(DB_URL, DB_USER,DB_PASSWORD);
-                
+
+    public void connect() {
+        try {
+            if (connection == null || connection.isClosed()) {
+                connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.err.println("Database connection failed!");
+            // Show an error message to the user
             JOptionPane.showMessageDialog(null, 
                 "Could not connect to the database. Please ensure the MySQL server is running.",
                 "Database Connection Error", JOptionPane.ERROR_MESSAGE);
         }
-        
     }
+
     public void disconnect() {
         if (connection != null) {
             try {
                 connection.close();
-            } catch (SQLException e) {}
+            } catch (SQLException e) { /* Ignore */ }
         }
     }
+
     public void saveScore(String playerName, int score) {
         if (connection == null) return;
         String sql = "INSERT INTO highscores(player_name, score) VALUES(?, ?)";
@@ -49,6 +51,7 @@ public class DatabaseManager {
             System.err.println("Error saving score: " + e.getMessage());
         }
     }
+
     public List<String> getHighScores() {
         if (connection == null) return new ArrayList<>();
         List<String> highScores = new ArrayList<>();
@@ -68,3 +71,4 @@ public class DatabaseManager {
         return highScores;
     }
 }
+
