@@ -37,4 +37,8 @@ public class sprite {
         Rectangle otherRect = new Rectangle(other.x, other.y, other.width, other.height);
         return thisRect.intersects(otherRect);
     }
+    
+    
+    public int getX() { return x; }
+    public int getY() { return y; }
 }
